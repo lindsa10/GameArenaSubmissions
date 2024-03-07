@@ -2,7 +2,6 @@ public class MyGame {
 
     public static void main(String[] args) {
         GameArena gameArena = new GameArena(400, 600);
-        Ball b = new Ball(250, 150, 30, "BLUE");
 
         // Creates border
         Line line1 = new Line(0, 0, 0, 600, 20, "BLUE");
@@ -14,13 +13,14 @@ public class MyGame {
         // Sprite that can move
         Rectangle one = new Rectangle(180, 535, 40, 40, "BLUE");
 
-        gameArena.addBall(b);
         gameArena.addLine(line1);
         gameArena.addLine(line2);
         gameArena.addLine(line3);
         gameArena.addLine(line4);
         gameArena.addLine(line5);
         gameArena.addRectangle(one);
+
+        Ball b = new Ball(one.getXPosition(), one.getYPosition(), 10, "BLUE");
 
 
         while (true) {
@@ -35,6 +35,11 @@ public class MyGame {
             }
             if (one.getXPosition() <= 10) {
                 one.setXPosition(10);
+            }
+            if (gameArena.spacePressed())
+            {
+                gameArena.addBall(b);
+                b.move(0, -5);
             }
 
             gameArena.pause();
